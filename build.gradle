@@ -1,0 +1,36 @@
+apply plugin: 'java'
+
+
+repositories {
+maven {
+url "http://nexus.etrade.com/content/groups/public"
+}
+}
+
+
+dependencies {
+	compile	(
+		[ group: 'org.javassist', name: 'javassist', version: '3.15.0-GA']
+		)
+}
+
+jar {
+archiveName = "agent-1.0.jar"
+    from {
+        (configurations.compile).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+manifest {
+attributes(
+'Premain-Class': 'com.etrade.agent.ThrottlingAgent',
+'Can-Redefine-Classes': 'true',
+'Can-Retransform-Classes':'true',
+'Can-Set-Native-Method-Prefix':'true',
+'Implementation-Title':"ClassLogger",
+'Implementation-Version':1.0,
+'Class-Path': configurations.compile.collect { it.getName() }.join(' ')
+)
+}
+}
+
