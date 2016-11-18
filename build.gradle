@@ -3,7 +3,7 @@ apply plugin: 'java'
 
 repositories {
 maven {
-url "http://nexus.etrade.com/content/groups/public"
+url "http://repo.maven.com/content/groups/public"
 }
 }
 
@@ -23,7 +23,7 @@ archiveName = "agent-1.0.jar"
     }
 manifest {
 attributes(
-'Premain-Class': 'com.etrade.agent.ThrottlingAgent',
+'Premain-Class': 'org.presci.ThrottlingAgent',
 'Can-Redefine-Classes': 'true',
 'Can-Retransform-Classes':'true',
 'Can-Set-Native-Method-Prefix':'true',
